@@ -1,0 +1,25 @@
+@extends('layouts.app')
+
+@section('content')
+    <pagina tamanho="10">
+        {{-- component painel.vue --}}
+        <painel titulo="Dashboard">
+            Teste de conteudo ...
+
+            <div class="row">
+                <div class="col-md-4">
+                    <caixa qtd="80" titulo="Artigos" url="{{route('artigos.index')}}" cor="orange" icone="ion ion-pie-graph"></caixa>
+                </div>
+
+                <div class="col-md-4">
+                    <caixa qtd="500" titulo="Usuários" url="#" cor="red" icone="ion ion-person-stalker"></caixa>
+                </div>
+
+                <div class="col-md-4">
+                    <caixa qtd="4" titulo="Autores" url="#" cor="blue" icone="ion ion-person-stalker"></caixa>
+                </div>
+            </div>
+        </painel>
+    </pagina>
+@endsection
+
