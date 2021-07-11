@@ -46093,13 +46093,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['titulos', 'itens', 'ordem', 'ordemcol', 'criar', 'detalhe', 'deletar', 'editar', 'token', 'index'],
     data: function data() {
         return {
-            buscar: ""
+            buscar: "",
+            ordemAux: this.ordem || "asc",
+            ordemAuxCol: this.ordemcol || 0
         };
     },
     methods: {
         executaForm: function executaForm(index) {
             document.getElementById(index).submit();
+        },
+        ordenarColuna: function ordenarColuna(coluna) {
+            this.ordemAuxCol = coluna;
+            if (this.ordemAux.toLowerCase() == "asc") {
+                this.ordemAux = "desc";
+            } else {
+                this.ordemAux = "asc";
+            }
         }
+
     },
     // metodos computados para listagem e busca
     computed: {
@@ -46115,8 +46126,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //     return 0;
             // });
 
-            var ordem = this.ordem || "asc";
-            var ordemCol = this.ordemcol || 0;
+            var ordem = this.ordemAux || "asc";
+            var ordemCol = this.ordemAuxCol || 0;
 
             ordem = ordem.toLowerCase();
             ordemCol = parseInt(ordemCol); //transforma a variavel em int
@@ -46203,8 +46214,19 @@ var render = function() {
         _c(
           "tr",
           [
-            _vm._l(_vm.titulos, function(titulo) {
-              return _c("th", [_vm._v(_vm._s(titulo))])
+            _vm._l(_vm.titulos, function(titulo, index) {
+              return _c(
+                "th",
+                {
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.ordenarColuna(index)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(titulo))]
+              )
             }),
             _vm._v(" "),
             _vm.detalhe || _vm.editar || _vm.deletar
@@ -46258,7 +46280,7 @@ var render = function() {
                               : _vm._e(),
                             _vm._v(" "),
                             _vm.editar
-                              ? _c("a", { attrs: { href: _vm.Editar } }, [
+                              ? _c("a", { attrs: { href: _vm.editar } }, [
                                   _vm._v(" Editar |")
                                 ])
                               : _vm._e(),

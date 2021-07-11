@@ -10,7 +10,7 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th v-for="titulo in titulos">{{titulo}}</th>
+                    <th style="cursor:pointer" v-on:click="ordenarColuna(index)" v-for="(titulo,index) in titulos">{{titulo}}</th>
 
                     <th v-if="detalhe || editar || deletar" >Ação</th>
                 </tr>
@@ -25,7 +25,7 @@
                             <input type="hidden" name="_token" v-bind:value="token">
 
                             <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
-                            <a v-if="editar"  v-bind:href="Editar"> Editar |</a>
+                            <a v-if="editar"  v-bind:href="editar"> Editar |</a>
 
                             <a href="#" v-on:click="executaForm(index)">Deletar</a>              
 
@@ -55,13 +55,24 @@
         ],
         data: function() {
             return {
-                buscar: ""
+                buscar: "",
+                ordemAux: this.ordem || "asc",
+                ordemAuxCol: this.ordemcol  || 0
             }
         },
         methods: {
             executaForm: function (index){
             document.getElementById(index).submit();
+            },
+            ordenarColuna: function (coluna) {
+                this.ordemAuxCol = coluna;
+                if (this.ordemAux.toLowerCase() == "asc"){
+                    this.ordemAux = "desc";
+                }else {
+                    this.ordemAux = "asc";
+                }
             }
+
         },
         // metodos computados para listagem e busca
         computed: {
@@ -75,8 +86,8 @@
                 //     return 0;
                 // });
 
-                let ordem = this.ordem || "asc";
-                let ordemCol = this.ordemcol || 0;
+                let ordem = this.ordemAux || "asc";
+                let ordemCol = this.ordemAuxCol || 0;
 
                 ordem = ordem.toLowerCase(); 
                 ordemCol = parseInt(ordemCol); //transforma a variavel em int
