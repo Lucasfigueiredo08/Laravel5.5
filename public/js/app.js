@@ -46090,7 +46090,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['titulos', 'itens', 'criar', 'detalhe', 'deletar', 'editar', 'token', 'index'],
+    props: ['titulos', 'itens', 'ordem', 'ordemcol', 'criar', 'detalhe', 'deletar', 'editar', 'token', 'index'],
     data: function data() {
         return {
             buscar: ""
@@ -46107,6 +46107,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             //let busca = "php";
+
+            // Sort para ordenar a lista
+            // this.itens.sort(function(a,b){
+            //     if (a[0] < b[0]){ return 1;} // se o a for maior que o b, crescente
+            //     if (a[0] > b[0]){ return -1;} //se o a for menor que b, descrescente
+            //     return 0;
+            // });
+
+            var ordem = this.ordem || "asc";
+            var ordemCol = this.ordemcol || 0;
+
+            ordem = ordem.toLowerCase();
+            ordemCol = parseInt(ordemCol); //transforma a variavel em int
+
+            if (ordem == "asc") {
+                this.itens.sort(function (a, b) {
+                    if (a[ordemCol] > b[ordemCol]) {
+                        return 1;
+                    } // se o a for maior que o b, crescente
+                    if (a[ordemCol] < b[ordemCol]) {
+                        return -1;
+                    } //se o a for menor que b, descrescente
+                    return 0;
+                });
+            } else {
+                this.itens.sort(function (a, b) {
+                    if (a[ordemCol] < b[ordemCol]) {
+                        return 1;
+                    } // se o a for maior que o b, crescente
+                    if (a[ordemCol] > b[ordemCol]) {
+                        return -1;
+                    } //se o a for menor que b, descrescente
+                    return 0;
+                });
+            }
+
             return this.itens.filter(function (res) {
                 // regras da busca
                 for (var id_items = 0; id_items < res.length; id_items++) {

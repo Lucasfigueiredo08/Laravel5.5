@@ -50,7 +50,7 @@
 
 <script>
     export default {
-        props:['titulos', 'itens', 'criar', 'detalhe',
+        props:['titulos', 'itens', 'ordem', 'ordemcol', 'criar', 'detalhe',
         'deletar', 'editar', 'token', 'index'
         ],
         data: function() {
@@ -67,6 +67,35 @@
         computed: {
             lista: function() {
                 //let busca = "php";
+
+                // Sort para ordenar a lista
+                // this.itens.sort(function(a,b){
+                //     if (a[0] < b[0]){ return 1;} // se o a for maior que o b, crescente
+                //     if (a[0] > b[0]){ return -1;} //se o a for menor que b, descrescente
+                //     return 0;
+                // });
+
+                let ordem = this.ordem || "asc";
+                let ordemCol = this.ordemcol || 0;
+
+                ordem = ordem.toLowerCase(); 
+                ordemCol = parseInt(ordemCol); //transforma a variavel em int
+
+                if(ordem == "asc"){
+                this.itens.sort(function(a,b){
+                    if (a[ordemCol] > b[ordemCol]){ return 1;} // se o a for maior que o b, crescente
+                    if (a[ordemCol] < b[ordemCol]){ return -1;} //se o a for menor que b, descrescente
+                    return 0;
+                });
+                }else{
+                this.itens.sort(function(a,b){
+                    if (a[ordemCol] < b[ordemCol]){ return 1;} // se o a for maior que o b, crescente
+                    if (a[ordemCol] > b[ordemCol]){ return -1;} //se o a for menor que b, descrescente
+                    return 0;
+                });
+                }
+
+
                 return this.itens.filter(res => {
                     // regras da busca
                     for(let id_items = 0; id_items < res.length; id_items++){
