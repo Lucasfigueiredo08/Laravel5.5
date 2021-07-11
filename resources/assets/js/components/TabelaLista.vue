@@ -1,16 +1,22 @@
 <template>
     <div>
-      <a v-if="criar" v-bind:href="criar">Criar</a>
+        <div class="form-inline" >
+            <a v-if="criar" v-bind:href="criar">Criar</a>
+            <div class="form-group pull-right" >
+                <input type="search" class="form-control" placeholder="Buscar" v-model="buscar"></input>
+            </div>
+        </div>
 
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th v-for="titulo in titulos">{{titulo}}</th>
+
                     <th v-if="detalhe || editar || deletar" >Ação</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in itens">
+                <tr v-for="(item, index) in lista">
                     <td v-for="i in item" >{{i}}</td>
                     
                     <td v-if="detalhe || editar || deletar" >
@@ -47,9 +53,32 @@
         props:['titulos', 'itens', 'criar', 'detalhe',
         'deletar', 'editar', 'token', 'index'
         ],
+        data: function() {
+            return {
+                buscar: ""
+            }
+        },
         methods: {
             executaForm: function (index){
             document.getElementById(index).submit();
+            }
+        },
+        // metodos computados para listagem e busca
+        computed: {
+            lista: function() {
+                //let busca = "php";
+                return this.itens.filter(res => {
+                    // regras da busca
+                    for(let id_items = 0; id_items < res.length; id_items++){
+                        // transformando em string com javascript
+                        if((res[id_items]+ "").toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0){
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+
+                return this.itens;
             }
         }
     }
