@@ -4,7 +4,7 @@
     <pagina tamanho="10">
         {{-- component painel.vue --}}
         <painel titulo="Dashboard">
-            Teste de conteudo ...
+            <migralhas v-bind:lista="{{$listaMigalhas}}"></migralhas>
 
             <div class="row">
                 <div class="col-md-4">
