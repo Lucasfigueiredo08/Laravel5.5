@@ -28,6 +28,6 @@ class HomeController extends Controller
             ["titulo" => "Home", "url"=>"#"],
         ]);
 
-        return view('home',compact('listaMigalhas'));
+        return view('home', compact('listaMigalhas'));
     }
 }

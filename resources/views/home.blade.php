@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <pagina tamanho="10">
+    <pagina tamanho="12">
         {{-- component painel.vue --}}
         <painel titulo="Dashboard">
-            <migralhas v-bind:lista="{{$listaMigalhas}}"></migralhas>
+            <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
 
             <div class="row">
                 <div class="col-md-4">
