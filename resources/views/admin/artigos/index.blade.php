@@ -15,32 +15,25 @@
 
         </painel>
     </pagina>
-        <modal nome="meuModalTest">
-            <painel titulo="Adicionar">
-            <form>
+    <modal nome="meuModalTest">
+        <painel titulo="Adicionar">
+        
+            <formulario css="" action="#" method="put" enctype="multipart/form-data" token="12345" >
                 <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    <label for="titulo">Títulos</label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" >
                 </div>
-                <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" id="exampleInputFile">
-                <p class="help-block">Example block-level help text here.</p>
-                </div>
-                <div class="checkbox">
-                <label>
-                    <input type="checkbox"> Check me out
-                </label>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
 
-        </modal>
-    </painel>
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" >
+                </div>
+
+                <button class="btn btn-info">Adicionar</button>
+            </formulario>
+        </painel>
+    </modal>
+    
     
 @endsection
 
