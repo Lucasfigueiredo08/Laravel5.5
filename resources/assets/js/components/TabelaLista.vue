@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="form-inline" >
+            <p>{{ this.$store.state.itens }}</p>
             <a v-if="criar" v-bind:href="criar">Criar</a>
             <div class="form-group pull-right" >
                 <input type="search" class="form-control" placeholder="Buscar" v-model="buscar"></input>
@@ -77,6 +78,8 @@
         // metodos computados para listagem e busca
         computed: {
             lista: function() {
+
+                this.$store.commit('setItens', {opa:'ok'});
                 //let busca = "php";
 
                 // Sort para ordenar a lista
@@ -94,20 +97,20 @@
 
                 if(ordem == "asc"){
                 this.itens.sort(function(a,b){
-                    if (a[ordemCol] > b[ordemCol]){ return 1;} // se o a for maior que o b, crescente
-                    if (a[ordemCol] < b[ordemCol]){ return -1;} //se o a for menor que b, descrescente
+                    if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]){ return 1;} // se o a for maior que o b, crescente
+                    if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]){ return -1;} //se o a for menor que b, descrescente
                     return 0;
                 });
                 }else{
                 this.itens.sort(function(a,b){
-                    if (a[ordemCol] < b[ordemCol]){ return 1;} // se o a for maior que o b, crescente
-                    if (a[ordemCol] > b[ordemCol]){ return -1;} //se o a for menor que b, descrescente
+                    if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]){ return 1;} // se o a for maior que o b, crescente
+                    if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]){ return -1;} //se o a for menor que b, descrescente
                     return 0;
                 });
                 }
 
-
-                return this.itens.filter(res => {
+                if(this.buscar){
+                    return this.itens.filter(res => {
                     // regras da busca
                     for(let id_items = 0; id_items < res.length; id_items++){
                         // transformando em string com javascript
@@ -117,6 +120,10 @@
                     }
                     return false;
                 });
+                }
+
+
+                
 
                 return this.itens;
             }
