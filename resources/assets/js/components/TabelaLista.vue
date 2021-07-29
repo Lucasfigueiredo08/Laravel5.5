@@ -119,6 +119,7 @@
 
                 if(this.buscar){
                     return this.itens.filter(res => {
+                        res = Object.values(res);
                     // regras da busca
                     for(let id_items = 0; id_items < res.length; id_items++){
                         // transformando em string com javascript
