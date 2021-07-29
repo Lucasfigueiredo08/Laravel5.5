@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="form-inline" >
-            <p>{{ this.$store.state.itens }}</p>
-            <a v-if="criar" v-bind:href="criar">Criar</a>
+            <a v-if="criar  && !modal" v-bind:href="criar">Criar</a>
+            <modallink v-if="criar  && modal" tipo="link" nome="adicionar" titulo="Criar" css=""></modallink>
             <div class="form-group pull-right" >
                 <input type="search" class="form-control" placeholder="Buscar" v-model="buscar"></input>
             </div>
@@ -26,19 +26,22 @@
                             <input type="hidden" name="_token" v-bind:value="token">
 
                             <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
-                            <a v-if="editar"  v-bind:href="editar"> Editar |</a>
+                            <a v-if="editar && !modal"  v-bind:href="editar"> Editar |</a>
+                            <modallink v-if="editar && modal" v-bind:item="item" tipo="link" nome="editar" titulo=" Editar |" css="" ></modallink>
 
                             <a href="#" v-on:click="executaForm(index)">Deletar</a>              
 
                         </form>
                         <span v-if="!token" > 
                             <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
-                            <a v-if="editar" v-bind:href="editar"> Editar |</a>
+                            <a v-if="editar && !modal" v-bind:href="editar"> Editar |</a>
+                            <modallink v-if="editar && modal" v-bind:item="item" tipo="link" nome="editar" titulo=" Editar |" css="" ></modallink>
                             <a v-if="deletar" v-bind:href="deletar"> Deletar </a>
                         </span>
                         <span v-if="token && !deletar"> 
                             <a v-if="detalhe" v-bind:href="detalhe">Detalhe |</a>
-                            <a v-if="editar" v-bind:href="editar"> Editar </a>
+                            <a v-if="editar && !modal" v-bind:href="editar"> Editar </a>
+                            <modallink v-if="editar && modal" v-bind:item="item" tipo="link" nome="editar" titulo=" Editar " css="" ></modallink>
                         </span>
 
                     </td>
@@ -52,7 +55,7 @@
 <script>
     export default {
         props:['titulos', 'itens', 'ordem', 'ordemcol', 'criar', 'detalhe',
-        'deletar', 'editar', 'token', 'index'
+        'deletar', 'editar', 'token','modal', 'index'
         ],
         data: function() {
             return {
@@ -78,8 +81,6 @@
         // metodos computados para listagem e busca
         computed: {
             lista: function() {
-
-                this.$store.commit('setItens', {opa:'ok'});
                 //let busca = "php";
 
                 // Sort para ordenar a lista
