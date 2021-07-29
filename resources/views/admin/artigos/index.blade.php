@@ -54,6 +54,12 @@
             </formulario>
         </painel>
     </modal>
+
+    <modal nome="detalhe">
+        <painel v-bind:titulo="$store.state.item.titulo">
+            <p> @{{$store.state.item.descricao}} </p>
+        </painel>
+    </modal>
     {{-- s   --}}
     
 @endsection
