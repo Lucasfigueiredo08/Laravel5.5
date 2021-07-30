@@ -47571,7 +47571,7 @@ var render = function() {
                           {
                             attrs: {
                               id: index,
-                              action: "index.html",
+                              action: _vm.deletar,
                               method: "post"
                             }
                           },
@@ -47673,7 +47673,6 @@ var render = function() {
                             _vm.editar && _vm.modal
                               ? _c("modallink", {
                                   attrs: {
-                                    item: item,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: " Editar |",

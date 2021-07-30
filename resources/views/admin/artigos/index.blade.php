@@ -8,7 +8,7 @@
             {{-- <modallink tipo="link" nome="meuModalTest" titulo="Criar" css=""></modallink> --}}
 
             <tabela-lista 
-                v-bind:titulos="['#', 'Títulos', 'Descrição']"
+                v-bind:titulos="['#', 'Títulos', 'Descrição', 'data']"
                 v-bind:itens="{{$listaArtigos}}"
                 ordem="desc" ordemCol="1"
                 criar="#criar" detalhe="#detalhe" editar="#editar" deletar="#deletar" token="7575757575"
@@ -17,16 +17,28 @@
 
         </painel>
     </pagina>
+
     <modal nome="adicionar" titulo="Adicionar">
-        <formulario id="formAdicionar" css="" action="#" method="put" enctype="multipart/form-data" token="12345" >
+        <formulario id="formAdicionar" css="" action="{{route('artigos.store')}}" method="post" enctype="" token="{{ csrf_token() }}" >
+            
             <div class="form-group">
                 <label for="titulo">Títulos</label>
-                <input type="text" class="form-control" id="titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título" >
+                <input type="text" class="form-control" id="titulo" name="titulo"  placeholder="Título" >
             </div>
 
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                <input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição" >
+                <input type="text" class="form-control" id="descricao" name="descricao"  placeholder="Descrição" >
+            </div>
+
+            <div class="form-group">
+                <label for="conteudo">Conteúdo</label>
+                <textarea class="form-control" name="conteudo" id="conteudo"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="datetime-local" class="form-control" id="data" name="data">
             </div>
 
             
