@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
 use App\Artigo;
 
 class ArtigosController extends Controller
@@ -51,6 +52,17 @@ class ArtigosController extends Controller
     {
        //dd($request->all());
         $data = $request->all();
+
+        $validacao = \Validator::make($data,[
+            "titulo" => "required",
+            "descricao" => "required",
+            "conteudo" => "required",
+            "data" => "required",
+        ]);
+
+        if($validacao->fails()){
+            return redirect()->back()->withErrors($validacao)->withInput();
+        }
        // $artigo = new Artigo;
        // $artigo->titulo = $data['titulo'];
        // $artigo->save();
