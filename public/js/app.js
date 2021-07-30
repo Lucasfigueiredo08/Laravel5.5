@@ -1437,7 +1437,11 @@ Vue.component('formulario', __webpack_require__(72));
 
 var app = new Vue({
     el: '#app',
-    store: store
+    store: store,
+    mounted: function mounted() {
+        console.log("ok");
+        document.getElementById('app').style.display = "block";
+    }
 });
 
 /***/ }),
