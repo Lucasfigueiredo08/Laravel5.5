@@ -1,74 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-    <pagina tamanho="12">
-        <painel titulo="Lista de Artigos">
-            <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
+  <pagina tamanho="12">
+    <painel titulo="Lista de Artigos">
+      <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
 
-            {{-- <modallink tipo="link" nome="meuModalTest" titulo="Criar" css=""></modallink> --}}
 
-            <tabela-lista 
-                v-bind:titulos="['#', 'Títulos', 'Descrição', 'data']"
-                v-bind:itens="{{$listaArtigos}}"
-                ordem="desc" ordemCol="1"
-                criar="#criar" detalhe="#detalhe" editar="#editar" deletar="#deletar" token="7575757575"
-                modal="sim"
-            ></tabela-lista>
 
-        </painel>
-    </pagina>
+      <tabela-lista
+      v-bind:titulos="['#','Título','Descrição','data']"
+      v-bind:itens="{{$listaArtigos}}"
+      ordem="desc" ordemcol="1"
+      criar="#criar" detalhe="#detalhe" editar="#editar" deletar="#deletar" token="7887522323"
+      modal="sim"
 
-    <modal nome="adicionar" titulo="Adicionar">
-        <formulario id="formAdicionar" css="" action="{{route('artigos.store')}}" method="post" enctype="" token="{{ csrf_token() }}" >
-            
-            <div class="form-group">
-                <label for="titulo">Títulos</label>
-                <input type="text" class="form-control" id="titulo" name="titulo"  placeholder="Título" >
-            </div>
+      ></tabela-lista>
 
-            <div class="form-group">
-                <label for="descricao">Descrição</label>
-                <input type="text" class="form-control" id="descricao" name="descricao"  placeholder="Descrição" >
-            </div>
+    </painel>
 
-            <div class="form-group">
-                <label for="conteudo">Conteúdo</label>
-                <textarea class="form-control" name="conteudo" id="conteudo"></textarea>
-            </div>
+  </pagina>
 
-            <div class="form-group">
-                <label for="data">Data</label>
-                <input type="datetime-local" class="form-control" id="data" name="data">
-            </div>
+  <modal nome="adicionar" titulo="Adicionar">
+    <formulario id="formAdicionar" css="" action="{{route('artigos.store')}}" method="post" enctype="" token="{{ csrf_token() }}">
 
-            
-        </formulario>
-        <span slot="botoes" >
-            <button form="formAdicionar" class="btn btn-info">Adicionar</button>
-        </span>
-    </modal>
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
+      </div>
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
+      </div>
 
-    <modal nome="editar" titulo="Editar">
-        <formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="12345" >
-            <div class="form-group">
-                <label for="titulo">Títulos</label>
-                <input type="text" class="form-control" id="titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título" >
-            </div>
+      <div class="form-group">
+        <label for="conteudo">Conteúdo</label>
+        <textarea class="form-control" id="conteudo" name="conteudo"></textarea>
+      </div>
 
-            <div class="form-group">
-                <label for="descricao">Descrição</label>
-                <input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição" >
-            </div>
-        </formulario>
-        <span slot="botoes" >
-            <button form="formEditar" class="btn btn-info">Atualizar</button>
-        </span>
-    </modal>
+      <div class="form-group">
+        <label for="data">Data</label>
+        <input type="datetime-local" class="form-control" id="data" name="data">
+      </div>
 
-    <modal nome="detalhe" v-bind:titulo="$store.state.item.titulo">
-        <p> @{{$store.state.item.descricao}} </p>
-    </modal>
-    {{-- s   --}}
-    
+    </formulario>
+    <span slot="botoes">
+      <button form="formAdicionar" class="btn btn-info">Adicionar</button>
+    </span>
+  </modal>
+
+  <modal nome="editar" titulo="Editar">
+    <formulario id="formEditar" css="" action="#" method="put" enctype="multipart/form-data" token="12345">
+
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" v-model="$store.state.item.titulo" placeholder="Título">
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" id="descricao" name="descricao" v-model="$store.state.item.descricao" placeholder="Descrição">
+      </div>
+    </formulario>
+    <span slot="botoes">
+      <button form="formEditar" class="btn btn-info">Atualizar</button>
+    </span>
+  </modal>
+  
+  <modal nome="detalhe" v-bind:titulo="$store.state.item.titulo">
+    <p>@{{$store.state.item.descricao}}</p>
+  </modal>
 @endsection
-

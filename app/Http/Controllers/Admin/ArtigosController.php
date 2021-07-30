@@ -18,13 +18,14 @@ class ArtigosController extends Controller
     {
         $listaMigalhas = json_encode([
             ["titulo" => "Home", "url"=> route('home')],
-            ["titulo" => "Lista de Artigos", "url"=> "#"]
+            ["titulo" => "Lista de Artigos", "url"=> ""]
         ]);
 
-        $listaArtigos = json_encode(Artigo::select('id', 'titulo', 'descricao', 'data'));
-            // ["id" => 1, "titulo"=> "PHP OO", "descricao"=> "Curso de PHP OO", "data"=>"2021-07-30"],
-            // ["id" => 2, "titulo"=> "Vue JS", "descricao"=> "Curso de Vue JS", "data"=>"2021-07-20"]
-        //]);
+        $listaArtigos = json_encode(Artigo::select('id', 'titulo', 'descricao', 'data')->get());
+        // $listaArtigos = json_encode([
+        //     ["id" => 1, "titulo"=> "PHP OO", "descricao"=> "Curso de PHP OO", "data"=>"2021-07-30"],
+        //     ["id" => 2, "titulo"=> "Vue JS", "descricao"=> "Curso de Vue JS", "data"=>"2021-07-20"]
+        //                         ]);
 
 
         return view('admin.artigos.index', compact('listaMigalhas', 'listaArtigos'));
@@ -48,7 +49,7 @@ class ArtigosController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request->all());
+       //dd($request->all());
         $data = $request->all();
        // $artigo = new Artigo;
        // $artigo->titulo = $data['titulo'];

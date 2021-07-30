@@ -18,7 +18,6 @@ Vue.use(Vuex);
  */
 
 //Vuex
-
 const store = new Vuex.Store({
     state:{
         item:{}

@@ -1412,7 +1412,6 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */]);
  */
 
 //Vuex
-
 var store = new __WEBPACK_IMPORTED_MODULE_0_Vuex__["a" /* default */].Store({
     state: {
         item: {}
@@ -47722,7 +47721,6 @@ var render = function() {
                             _vm.editar && _vm.modal
                               ? _c("modallink", {
                                   attrs: {
-                                    item: item,
                                     tipo: "link",
                                     nome: "editar",
                                     titulo: " Editar ",
@@ -47843,10 +47841,12 @@ var render = function() {
       return _c("li", [
         item.url
           ? _c("a", { class: _vm.defineClass, attrs: { href: item.url } }, [
-              _vm._v(" " + _vm._s(item.titulo))
+              _vm._v(_vm._s(item.titulo))
             ])
           : _vm._e(),
-        !item.url ? _c("span") : _vm._e()
+        !item.url
+          ? _c("span", [_vm._v(" " + _vm._s(item.titulo) + " ")])
+          : _vm._e()
       ])
     }),
     0
@@ -48302,7 +48302,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     computed: {
-        defoneMethod: function defoneMethod() {
+        defineMethod: function defineMethod() {
             if (this.method.toLowerCase() == "post" || this.method.toLowerCase() == "get") {
                 return this.method.toLowerCase();
             }
@@ -48329,10 +48329,11 @@ var render = function() {
   return _c(
     "form",
     {
+      class: _vm.css,
       attrs: {
         action: _vm.action,
-        method: _vm.post,
-        enctype: _vm.multipart / _vm.form - _vm.data
+        method: _vm.defineMethod,
+        enctype: _vm.enctype
       }
     },
     [
