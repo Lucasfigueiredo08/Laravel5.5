@@ -70,7 +70,7 @@ class ArtigosController extends Controller
         return redirect()->back();
     }
 
-    /**
+    /**s
      * Display the specified resource.
      *
      * @param  int  $id
@@ -78,7 +78,9 @@ class ArtigosController extends Controller
      */
     public function show($id)
     {
-        //
+        //mostrar as informações dos artigos
+        return Artigo::find($id);
+        
     }
 
     /**
