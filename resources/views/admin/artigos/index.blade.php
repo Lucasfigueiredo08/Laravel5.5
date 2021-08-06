@@ -22,7 +22,7 @@
       v-bind:titulos="['#','Título','Descrição','data']"
       v-bind:itens="{{$listaArtigos}}"
       ordem="desc" ordemcol="1"
-      criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="#deletar" token="7887522323"
+      criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="/admin/artigos/" token="{{csrf_token()}}"
       modal="sim"
 
       ></tabela-lista>
@@ -78,7 +78,7 @@
         <textarea class="form-control" id="conteudo" name="conteudo" v-model="$store.state.item.conteudo" ></textarea>
       </div>
 
-      <div class="form-group">
+      <div class="form-group">de
         <label for="data">Data</label>
         <input type="datetime-local" class="form-control" id="data" name="data" v-model="$store.state.item.data">
       </div>
