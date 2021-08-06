@@ -96,7 +96,7 @@
                 //     if (a[0] > b[0]){ return -1;} //se o a for menor que b, descrescente
                 //     return 0;
                 // });
-
+                let lista = this.itens.data;
                 let ordem = this.ordemAux || "asc";
                 let ordemCol = this.ordemAuxCol || 0;
 
@@ -104,13 +104,13 @@
                 ordemCol = parseInt(ordemCol); //transforma a variavel em int
 
                 if(ordem == "asc"){
-                this.itens.sort(function(a,b){
+                lista.sort(function(a,b){
                     if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]){ return 1;} // se o a for maior que o b, crescente
                     if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]){ return -1;} //se o a for menor que b, descrescente
                     return 0;
                 });
                 }else{
-                this.itens.sort(function(a,b){
+                lista.sort(function(a,b){
                     if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]){ return 1;} // se o a for maior que o b, crescente
                     if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]){ return -1;} //se o a for menor que b, descrescente
                     return 0;
@@ -118,7 +118,7 @@
                 }
 
                 if(this.buscar){
-                    return this.itens.filter(res => {
+                    return lista.filter(res => {
                         res = Object.values(res);
                     // regras da busca
                     for(let id_items = 0; id_items < res.length; id_items++){
@@ -134,7 +134,7 @@
 
                 
 
-                return this.itens;
+                return lista;
             }
         }
     }
