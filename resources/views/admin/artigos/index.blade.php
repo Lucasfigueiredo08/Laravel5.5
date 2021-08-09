@@ -83,7 +83,7 @@
         <textarea class="form-control" id="conteudo" name="conteudo" v-model="$store.state.item.conteudo" ></textarea>
       </div>
 
-      <div class="form-group">de
+      <div class="form-group">
         <label for="data">Data</label>
         <input type="datetime-local" class="form-control" id="data" name="data" v-model="$store.state.item.data">
       </div>
