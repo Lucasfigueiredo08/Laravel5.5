@@ -19,7 +19,7 @@
 
       {{-- {{$listaArtigos}} --}}
       <tabela-lista
-      v-bind:titulos="['#','Nome','E-mail']"
+      v-bind:titulos="['#','Nome','E-mail', 'Autor']"
       v-bind:itens="{{json_encode($listaModelo)}}"
       ordem="desc" ordemcol="1"
       criar="#criar" detalhe="/admin/usuarios/" editar="/admin/usuarios/" deletar="/admin/usuarios/" token="{{csrf_token()}}"
@@ -43,9 +43,18 @@
         <label for="name">Nome</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Nome" value={{old("name")}}>
       </div>
+
       <div class="form-group">
         <label for="email">E-mail</label>
         <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" value={{old("email")}}>
+      </div>
+
+      <div class="form-group">
+        <label for="autor">Autor</label>
+        <select class="form-control" id="autor" name="autor">
+          <option {{(old('autor') && old('autor') == 'N' ? 'selected' : '' )}} value="N">Não</option>
+          <option {{(old('autor') && old('autor') == 'S' ? 'selected' : '' )}} value="S">Sim</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -71,6 +80,14 @@
       <div class="form-group">
         <label for="email">E-mail</label>
         <input type="email" class="form-control" id="email" name="email" v-model="$store.state.item.email" placeholder="E-mail">
+      </div>
+
+      <div class="form-group">
+        <label for="autor">Autor</label>
+        <select class="form-control" id="autor" name="autor" v-model="$store.state.item.autor">
+          <option  value="N">Não</option>
+          <option  value="S">Sim</option>
+        </select>
       </div>
 
       <div class="form-group">

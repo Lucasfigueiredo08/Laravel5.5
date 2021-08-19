@@ -21,7 +21,7 @@ class UsuariosController extends Controller
             ["titulo" => "Lista de Usuários", "url"=> ""]
         ]);
 
-        $listaModelo = User::select('id', 'name', 'email')->paginate(5); //->get());
+        $listaModelo = User::select('id', 'name', 'email', 'autor')->paginate(5); //->get());
         // $listaArtigos = json_encode([
         //     ["id" => 1, "titulo"=> "PHP OO", "descricao"=> "Curso de PHP OO", "data"=>"2021-07-30"],
         //     ["id" => 2, "titulo"=> "Vue JS", "descricao"=> "Curso de Vue JS", "data"=>"2021-07-20"]
