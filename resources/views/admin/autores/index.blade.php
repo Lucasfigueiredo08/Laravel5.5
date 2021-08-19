@@ -52,7 +52,7 @@
         <label for="autor">Autor</label>
         <select class="form-control" id="autor" name="autor">
           <option {{(old('autor') && old('autor') == 'N' ? 'selected' : '' )}} value="N">Não</option>
-          <option {{(old('autor') && old('autor') == 'S' ? 'selected' : '' )}} value="S">Sim</option>
+          <option {{(old('autor') && old('autor') == 'S' ? 'selected' : '' )}} {{(!old('autor') ? 'selected' : '' )}} value="S">Sim</option>
         </select>
       </div>
 
