@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-
+use Illuminate\Validation\Rule;
 
 class UsuariosController extends Controller
 {
@@ -21,7 +21,7 @@ class UsuariosController extends Controller
             ["titulo" => "Lista de Usuários", "url"=> ""]
         ]);
 
-        $listaModelo = User::select('id', 'name', 'email')->paginate(2); //->get());
+        $listaModelo = User::select('id', 'name', 'email')->paginate(5); //->get());
         // $listaArtigos = json_encode([
         //     ["id" => 1, "titulo"=> "PHP OO", "descricao"=> "Curso de PHP OO", "data"=>"2021-07-30"],
         //     ["id" => 2, "titulo"=> "Vue JS", "descricao"=> "Curso de Vue JS", "data"=>"2021-07-20"]
@@ -100,11 +100,27 @@ class UsuariosController extends Controller
     {
         $data = $request->all();
 
-         $validacao = \Validator::make($data,[
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-         ]);
+        if(isset($data['password']) && $data['password'] != ""){
+            $validacao = \Validator::make($data,[
+                'name' => 'required|string|max:255',
+                //'email' => 'required|string|email|max:255|unique:users',
+                'email' => ['required', 'string', 'email', 'max:255',Rule::unique('users')->ignore($id)],
+                'password' => 'required|string|min:6',
+             ]);
+             $data['password'] = bcrypt($data['password']); 
+        }else{
+            $validacao = \Validator::make($data,[
+                'name' => 'required|string|max:255',
+                'email' => ['required', 'string', 'email', 'max:255',Rule::unique('users')->ignore($id)]
+             ]);
+             unset($data['password']);
+        }
+
+        //  $validacao = \Validator::make($data,[
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'password' => 'required|string|min:6',
+        //  ]);
  
          if($validacao->fails()){
              return redirect()->back()->withErrors($validacao)->withInput();
