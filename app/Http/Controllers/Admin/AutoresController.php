@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Validation\Rule;
 
-class UsuariosController extends Controller
+class AutoresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,17 +18,12 @@ class UsuariosController extends Controller
     {
         $listaMigalhas = json_encode([
             ["titulo" => "Home", "url"=> route('home')],
-            ["titulo" => "Lista de Usuários", "url"=> ""]
+            ["titulo" => "Lista de Autores", "url"=> ""]
         ]);
 
         $listaModelo = User::select('id', 'name', 'email')->paginate(5); //->get());
-        // $listaArtigos = json_encode([
-        //     ["id" => 1, "titulo"=> "PHP OO", "descricao"=> "Curso de PHP OO", "data"=>"2021-07-30"],
-        //     ["id" => 2, "titulo"=> "Vue JS", "descricao"=> "Curso de Vue JS", "data"=>"2021-07-20"]
-        //                         ]);
 
-
-        return view('admin.usuarios.index', compact('listaMigalhas', 'listaModelo'));
+        return view('admin.autores.index', compact('listaMigalhas', 'listaModelo'));
     }
 
     /**
@@ -115,18 +110,11 @@ class UsuariosController extends Controller
              ]);
              unset($data['password']);
         }
-        
-
-        //  $validacao = \Validator::make($data,[
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|string|min:6',
-        //  ]);
  
          if($validacao->fails()){
              return redirect()->back()->withErrors($validacao)->withInput();
          }
-        //  procure o id e toque as informações pelas que estão no $data
+        
          User::find($id)->update($data);
          return redirect()->back();
     }

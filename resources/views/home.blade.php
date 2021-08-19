@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <caixa qtd="4" titulo="Autores" url="#" cor="blue" icone="ion ion-person-stalker"></caixa>
+                    <caixa qtd="4" titulo="Autores" url="{{route('autores.index')}}" cor="blue" icone="ion ion-person-stalker"></caixa>
                 </div>
             </div>
         </painel>
