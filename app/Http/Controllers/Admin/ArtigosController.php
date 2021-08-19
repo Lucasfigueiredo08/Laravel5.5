@@ -22,7 +22,7 @@ class ArtigosController extends Controller
             ["titulo" => "Lista de Artigos", "url"=> ""]
         ]);
 
-        $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'data')->paginate(5); //->get());
+        $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'user_id', 'data')->paginate(5); //->get());
         // $listaArtigos = json_encode([
         //     ["id" => 1, "titulo"=> "PHP OO", "descricao"=> "Curso de PHP OO", "data"=>"2021-07-30"],
         //     ["id" => 2, "titulo"=> "Vue JS", "descricao"=> "Curso de Vue JS", "data"=>"2021-07-20"]

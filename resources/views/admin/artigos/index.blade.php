@@ -19,7 +19,7 @@
 
       {{-- {{$listaArtigos}} --}}
       <tabela-lista
-      v-bind:titulos="['#','Título','Descrição','data' ]"
+      v-bind:titulos="['#','Título','Descrição','Autor','data' ]"
       v-bind:itens="{{json_encode($listaArtigos)}}"
       ordem="desc" ordemcol="1"
       criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="/admin/artigos/" token="{{csrf_token()}}"
