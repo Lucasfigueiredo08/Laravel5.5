@@ -30,7 +30,7 @@ class ArtigosController extends Controller
             $value->user_id = \App\User::find($value->user_id)->name;
             //$value->user_id = $value->user->name;
             //unset($value->user);
-        }*/
+        }
 
         // $listaArtigos = json_encode([
         //     ["id" => 1, "titulo"=> "PHP OO", "descricao"=> "Curso de PHP OO", "data"=>"2021-07-30"],
@@ -44,6 +44,9 @@ class ArtigosController extends Controller
                         // Verifica se o arquivo de data de excluído
                         ->whereNull('deleted_at')
                         ->paginate(5);
+        */
+
+        $listaArtigos = Artigo::listaArtigo(5);
 
         return view('admin.artigos.index', compact('listaMigalhas', 'listaArtigos'));
     }
