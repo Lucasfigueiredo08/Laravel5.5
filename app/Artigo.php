@@ -16,7 +16,8 @@ class Artigo extends Model
 
     //relacionamentos
     
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\User'); // traz o usuário que tem relação com o artigo
     }
 }

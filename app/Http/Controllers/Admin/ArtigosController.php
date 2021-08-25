@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
+use Illuminate\Support\Facades\DB;
 use App\Artigo;
 
 class ArtigosController extends Controller
@@ -20,14 +20,30 @@ class ArtigosController extends Controller
         $listaMigalhas = json_encode([
             ["titulo" => "Home", "url"=> route('home')],
             ["titulo" => "Lista de Artigos", "url"=> ""]
-        ]);
+        ]); 
 
+        /*
         $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'user_id', 'data')->paginate(5); //->get());
+
+        //pegando o nome do usuário (lógica)
+        foreach ($listaArtigos as $key => $value){
+            $value->user_id = \App\User::find($value->user_id)->name;
+            //$value->user_id = $value->user->name;
+            //unset($value->user);
+        }*/
+
         // $listaArtigos = json_encode([
         //     ["id" => 1, "titulo"=> "PHP OO", "descricao"=> "Curso de PHP OO", "data"=>"2021-07-30"],
         //     ["id" => 2, "titulo"=> "Vue JS", "descricao"=> "Curso de Vue JS", "data"=>"2021-07-20"]
         //                         ]);
 
+        //logica de select usando o banco de dados
+        $listaArtigos = DB::table('artigos')
+                        ->join('users', 'users.id', '=', 'artigos.user_id')
+                        ->select('artigos.id', 'artigos.titulo','artigos.descricao', 'users.name', 'artigos.data')
+                        // Verifica se o arquivo de data de excluído
+                        ->whereNull('deleted_at')
+                        ->paginate(5);
 
         return view('admin.artigos.index', compact('listaMigalhas', 'listaArtigos'));
     }
