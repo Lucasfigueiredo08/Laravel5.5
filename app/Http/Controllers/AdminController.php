@@ -8,7 +8,7 @@ use App\Arigo;
 use App\Artigo;
 use App\User;
 
-class HomeController extends Controller
+class AdminController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
         
         $listaMigalhas = json_encode([
-            ["titulo" => "Home", "url"=>"#"],
+            ["titulo" => "Admin", "url"=>""],
         ]);
 
         $totalUsuarios = User::count();
@@ -37,7 +37,7 @@ class HomeController extends Controller
         $totalAutores = User::where('autor', '=', 'S')->count();
         //User::find('Autor', '=', 'S')
 
-        return view('home', compact('listaMigalhas', 'totalUsuarios', 'totalArtigos', 'totalAutores'));
+        return view('admin', compact('listaMigalhas', 'totalUsuarios', 'totalArtigos', 'totalAutores'));
 
         
     }
