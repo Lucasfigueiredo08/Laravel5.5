@@ -21,7 +21,7 @@
       <tabela-lista
       v-bind:titulos="['#','Título','Descrição','Autor','data' ]"
       v-bind:itens="{{json_encode($listaArtigos)}}"
-      ordem="desc" ordemcol="1"
+      ordem="desc" ordemcol="0"
       criar="#criar" detalhe="/admin/artigos/" editar="/admin/artigos/" deletar="/admin/artigos/" token="{{csrf_token()}}"
       modal="sim"
 
@@ -49,8 +49,21 @@
       </div>
 
       <div class="form-group">
-        <label for="conteudo">Conteúdo</label>
-        <textarea class="form-control" id="conteudo" name="conteudo">{{old("conteudo")}}</textarea>
+        <label for="addConteudo">Conteúdo</label>
+        <textarea class="form-control" id="addConteudo" name="conteudo" v-model="$store.state.item.conteudo" ></textarea>
+ 
+        {{-- <ckeditor
+          id="addConteudo"
+          name="conteudo"
+          value="{{old('conteudo')}}"
+          v-bind:config="{
+            toolbar: [
+              [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript' ]
+            ],
+            height: 200
+          }">
+        </ckeditor> --}}
+      
       </div>
 
       <div class="form-group">
@@ -79,8 +92,20 @@
       </div>
 
       <div class="form-group">
-        <label for="conteudo">Conteúdo</label>
-        <textarea class="form-control" id="conteudo" name="conteudo" v-model="$store.state.item.conteudo" ></textarea>
+        <label for="editConteudo">Conteúdo</label>
+        <textarea class="form-control" id="editConteudo" name="conteudo" v-model="$store.state.item.conteudo" ></textarea>
+      
+        {{-- <ckeditor
+          id="editConteudo"
+          name="conteudo"
+          value="$store.state.item.conteudo"
+          v-bind:config="{
+            toolbar: [
+              [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript' ]
+            ],
+            height: 200
+          }">
+        </ckeditor> --}}
       </div>
 
       <div class="form-group">
