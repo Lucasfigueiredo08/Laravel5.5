@@ -18,6 +18,10 @@
                 <div class="col-md-4">
                     <caixa qtd="{{$totalAutores}}" titulo="Autores" url="{{route('autores.index')}}" cor="blue" icone="ion ion-person-stalker"></caixa>
                 </div>
+
+                <div class="col-md-4">
+                    <caixa qtd="{{$totalAdmin}}" titulo="Admin" url="{{route('adm.index')}}" cor="green" icone="ion ion-person-stalker"></caixa>
+                </div>
             </div>
         </painel>
     </pagina>
