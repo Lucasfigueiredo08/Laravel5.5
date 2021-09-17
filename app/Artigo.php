@@ -41,4 +41,20 @@ class Artigo extends Model
 
         return $listaArtigos;
     }
+
+    public static function listaArtigoSite ($paginate){
+        $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'user_id', 'data')->paginate($paginate);
+
+
+        $listaArtigos = DB::table('artigos')
+                        ->join('users', 'users.id', '=', 'artigos.user_id')
+                        ->select('artigos.id', 'artigos.titulo','artigos.descricao', 'users.name as autor', 'artigos.data')
+                        // Verifica se o arquivo de data de excluído
+                        ->whereNull('deleted_at')
+                        ->whereDate('data', '<=', date('Y-m-d'))
+                        ->orderBy('data', 'DESC')
+                        ->paginate(5);
+
+        return $listaArtigos;
+    }
 }

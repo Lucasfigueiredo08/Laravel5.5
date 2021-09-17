@@ -1,5 +1,5 @@
 <?php
-
+use App\Artigo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('site');
+    $lista = Artigo::listaArtigoSite(5);
+    return view('site', compact('lista'));
 });
 
 Auth::routes();
