@@ -5,15 +5,15 @@
         <painel titulo="Artigos">
 
             <div class="row">
-              @foreach ($lista as $key => $value)
+              @foreach ($lista as $key => $valor)
 
               <artigocard
-                titulo="{{$value->titulo}}"
-                descricao="{{$value->descricao}}"
-                link="#"
+                titulo="{{$valor->titulo}}"
+                descricao="{{$valor->descricao}}"
+                link=" {{route('artigo', [$valor->id, str_slug($valor->titulo)])}} "
                 imagem="https://cdn.pixabay.com/photo/2017/09/18/16/54/links-2762389_960_720.png"
-                data="{{$value->data}}"
-                autor="{{$value->autor}}"
+                data="{{$valor->data}}"
+                autor="{{$valor->autor}}"
                 sm="6"
                 md="4"
               >       
