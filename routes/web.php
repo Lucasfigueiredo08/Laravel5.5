@@ -19,17 +19,13 @@ Route::get('/', function (Request $req) {
 
     if(isset($req->busca)  && ($req->busca != "")){
         $busca = $req->busca;
-        Artigo::listaArtigoSite(3, $busca);
+        $lista=Artigo::listaArtigoSite(3, $busca);
 
-        $lista = Artigo::
-            orWhere('titulo', 'like', '%'.$busca.'%')
-            ->orWhere('descricao', 'like', '%'.$busca.'%')->paginate(3);
-
-
-    }else{
+    } else {
         $lista = Artigo::listaArtigoSite(3);
         $busca = "";
     }
+
 
     
     return view('site', compact('lista', 'busca'));

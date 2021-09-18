@@ -53,6 +53,10 @@ class Artigo extends Model
             // Verifica se o arquivo de data de excluído
             ->whereNull('deleted_at')
             ->whereDate('data', '<=', date('Y-m-d'))
+            ->where(function($query) use($busca){
+                $query->orWhere('titulo', 'like', '%'.$busca.'%')
+                    ->orWhere('descricao', 'like', '%'.$busca.'%')->paginate(3);
+            })
             ->orderBy('data', 'DESC')
             ->paginate($paginate);
         } else {
