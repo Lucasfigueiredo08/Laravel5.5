@@ -84,10 +84,13 @@ class ArtigosController extends Controller
         if($validacao->fails()){
             return redirect()->back()->withErrors($validacao)->withInput();
         }
+        $user = auth()->user();
+        // dd($user->name); 
+        $user->artigos()->create($data);
        // $artigo = new Artigo;
        // $artigo->titulo = $data['titulo'];
        // $artigo->save();
-        Artigo::create($data);
+        //Artigo::create($data);
         return redirect()->back();
     }
 
@@ -136,8 +139,11 @@ class ArtigosController extends Controller
          if($validacao->fails()){
              return redirect()->back()->withErrors($validacao)->withInput();
          }
+         
         //  procure o id e toque as informações pelas que estão no $data
-         Artigo::find($id)->update($data);
+        $user = auth()->user();
+        $user->artigos()->find($id)->udpate($data);
+         //Artigo::find($id)->update($data);
          return redirect()->back();
     }
 

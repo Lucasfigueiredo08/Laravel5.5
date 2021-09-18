@@ -31,13 +31,26 @@ class Artigo extends Model
             //$value->user_id = $value->user->name;
             //unset($value->user);
         }*/
+        $user = auth()->user();
 
-        $listaArtigos = DB::table('artigos')
+        if($user->admin == "S"){
+            $listaArtigos = DB::table('artigos')
                         ->join('users', 'users.id', '=', 'artigos.user_id')
                         ->select('artigos.id', 'artigos.titulo','artigos.descricao', 'users.name', 'artigos.data')
                         // Verifica se o arquivo de data de excluído
                         ->whereNull('deleted_at')
+                        ->orderBy('artigos.id', 'DESC')
                         ->paginate(5);
+        }else{
+            $listaArtigos = DB::table('artigos')
+                        ->join('users', 'users.id', '=', 'artigos.user_id')
+                        ->select('artigos.id', 'artigos.titulo','artigos.descricao', 'users.name', 'artigos.data')
+                        // Verifica se o arquivo de data de excluído
+                        ->whereNull('deleted_at')
+                        ->where('artigos.user_id', '=', $user->id)  
+                        ->orderBy('artigos.id', 'DESC')
+                        ->paginate(5);
+        }
 
         return $listaArtigos;
         
