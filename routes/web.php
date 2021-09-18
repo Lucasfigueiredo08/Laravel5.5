@@ -1,5 +1,6 @@
 <?php
 use App\Artigo;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,9 +12,27 @@ use App\Artigo;
 |
 */
 
-Route::get('/', function () {
-    $lista = Artigo::listaArtigoSite(5);
-    return view('site', compact('lista'));
+Route::get('/', function (Request $req) {
+
+    //dd($req->all());
+    //dd($req->buscar);
+
+    if(isset($req->busca)  && ($req->busca != "")){
+        $busca = $req->busca;
+        Artigo::listaArtigoSite(3, $busca);
+
+        $lista = Artigo::
+            orWhere('titulo', 'like', '%'.$busca.'%')
+            ->orWhere('descricao', 'like', '%'.$busca.'%')->paginate(3);
+
+
+    }else{
+        $lista = Artigo::listaArtigoSite(3);
+        $busca = "";
+    }
+
+    
+    return view('site', compact('lista', 'busca'));
 })->name('site');
 
 Route::get('/artigo/{id}/{titulo?}', function ($id) {

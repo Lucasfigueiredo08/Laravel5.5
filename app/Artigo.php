@@ -43,11 +43,20 @@ class Artigo extends Model
         
     }
 
-    public static function listaArtigoSite ($paginate){
+    public static function listaArtigoSite ($paginate, $busca = null){
         // $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'user_id', 'data')->paginate($paginate);
 
-
-        $listaArtigos = DB::table('artigos')
+        if($busca){
+            $listaArtigos = DB::table('artigos')
+            ->join('users', 'users.id', '=', 'artigos.user_id')
+            ->select('artigos.id', 'artigos.titulo','artigos.descricao', 'users.name as autor', 'artigos.data')
+            // Verifica se o arquivo de data de excluído
+            ->whereNull('deleted_at')
+            ->whereDate('data', '<=', date('Y-m-d'))
+            ->orderBy('data', 'DESC')
+            ->paginate($paginate);
+        } else {
+            $listaArtigos = DB::table('artigos')
                         ->join('users', 'users.id', '=', 'artigos.user_id')
                         ->select('artigos.id', 'artigos.titulo','artigos.descricao', 'users.name as autor', 'artigos.data')
                         // Verifica se o arquivo de data de excluído
@@ -55,6 +64,7 @@ class Artigo extends Model
                         ->whereDate('data', '<=', date('Y-m-d'))
                         ->orderBy('data', 'DESC')
                         ->paginate($paginate);
+        }
 
         return $listaArtigos;
     }
