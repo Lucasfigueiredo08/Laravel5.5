@@ -18,7 +18,7 @@ class AdminController extends Controller
     {
         $listaMigalhas = json_encode([
             ["titulo" => "Admin", "url"=> route('admin')],
-            ["titulo" => "Lista de Administradores", "url"=> ""]
+            ["titulo" => "Lista de Admin", "url"=> ""]
         ]);
 
         $listaModelo = User::select('id', 'name', 'email')->where('admin', '=', 'S')->paginate(3); //->get());

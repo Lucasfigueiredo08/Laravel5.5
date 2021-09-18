@@ -13,7 +13,7 @@
       </div>
     @endif()
 
-    <painel titulo="Lista de Administradores">
+    <painel titulo="Lista de Admin">
       <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
 
 

@@ -16,8 +16,6 @@
     <painel titulo="Lista de Autores">
       <migalhas v-bind:lista="{{$listaMigalhas}}"></migalhas>
 
-
-      {{-- {{$listaArtigos}} --}}
       <tabela-lista
       v-bind:titulos="['#','Nome','E-mail']"
       v-bind:itens="{{json_encode($listaModelo)}}"

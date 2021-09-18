@@ -22,8 +22,8 @@ class Artigo extends Model
         return $this->belongsTo('App\User'); // traz o usuário que tem relação com o artigo
     }
 
-    public static function listaArtigo ($paginate){
-        $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'user_id', 'data')->paginate($paginate);
+    public static function listaArtigo($paginate){
+        // $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'user_id', 'data')->paginate($paginate);
         
         /*
         foreach ($listaArtigos as $key => $value){
@@ -40,10 +40,11 @@ class Artigo extends Model
                         ->paginate(5);
 
         return $listaArtigos;
+        
     }
 
     public static function listaArtigoSite ($paginate){
-        $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'user_id', 'data')->paginate($paginate);
+        // $listaArtigos = Artigo::select('id', 'titulo', 'descricao', 'user_id', 'data')->paginate($paginate);
 
 
         $listaArtigos = DB::table('artigos')
@@ -53,7 +54,7 @@ class Artigo extends Model
                         ->whereNull('deleted_at')
                         ->whereDate('data', '<=', date('Y-m-d'))
                         ->orderBy('data', 'DESC')
-                        ->paginate(5);
+                        ->paginate($paginate);
 
         return $listaArtigos;
     }

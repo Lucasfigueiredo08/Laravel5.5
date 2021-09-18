@@ -47,8 +47,10 @@ class ArtigosController extends Controller
         */
 
         $listaArtigos = Artigo::listaArtigo(5);
+        // dd(session($listaArtigos));
 
         return view('admin.artigos.index', compact('listaMigalhas', 'listaArtigos'));
+        
     }
 
     /**
